@@ -16,7 +16,7 @@ describe('Card', () => {
         <CardFooter><Button onClick={onClick}>Open workspace</Button></CardFooter>
       </Card>,
     );
-    expect(ref.current).toHaveClass('aurora-card', 'custom');
+    expect(ref.current).toHaveClass('venhea-card', 'custom');
     expect(ref.current).not.toHaveAttribute('role');
     expect(within(ref.current!).getByRole('heading', { name: 'Sample workspace' })).toBeInTheDocument();
     expect(screen.getByText('A synthetic workspace for component examples.')).toBeInTheDocument();

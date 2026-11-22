@@ -1,8 +1,8 @@
 {
-  "name": "aurora-ui-kit",
+  "name": "venhea-ui",
   "version": "1.2.0",
   "private": true,
-  "description": "A small, accessible React component library for a synthetic GitHub sandbox.",
+  "description": "A small, accessible TypeScript and React component library.",
   "license": "MIT",
   "type": "module",
   "engines": { "node": ">=26.13.0" },

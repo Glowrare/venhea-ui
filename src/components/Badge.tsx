@@ -6,5 +6,5 @@ export interface BadgeProps extends ComponentPropsWithRef<'span'> {
 }
 
 export function Badge({ variant = 'neutral', className, ...props }: BadgeProps) {
-  return <span {...props} className={classes('aurora-badge', `aurora-badge--${variant}`, className)} />;
+  return <span {...props} className={classes('venhea-badge', `venhea-badge--${variant}`, className)} />;
 }

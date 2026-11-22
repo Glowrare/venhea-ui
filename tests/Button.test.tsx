@@ -12,7 +12,7 @@ describe('Button', () => {
     render(<Button ref={ref} onClick={onClick} name="action" className="custom">Save draft</Button>);
     const button = screen.getByRole('button', { name: 'Save draft' });
     expect(button).toHaveAttribute('type', 'button');
-    expect(button).toHaveClass('aurora-button--primary', 'aurora-button--md', 'custom');
+    expect(button).toHaveClass('venhea-button--primary', 'venhea-button--md', 'custom');
     expect(ref.current).toBe(button);
     expect(button).toHaveAttribute('name', 'action');
     await user.tab();
@@ -41,7 +41,7 @@ describe('Button', () => {
     rerender(<form onSubmit={onSubmit}><Button type="submit" variant="secondary" size="lg">Save</Button></form>);
     const button = screen.getByRole('button', { name: 'Save' });
     expect(button).not.toHaveAttribute('aria-busy');
-    expect(button).toHaveClass('aurora-button--secondary', 'aurora-button--lg');
+    expect(button).toHaveClass('venhea-button--secondary', 'venhea-button--lg');
     await user.click(button);
     expect(onSubmit).toHaveBeenCalledOnce();
   });

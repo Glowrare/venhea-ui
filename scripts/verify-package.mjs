@@ -24,9 +24,9 @@ const packOutput = npm(['pack', '--json']);
 // npm can forward prepack's build output before the final JSON array.
 const jsonStart = packOutput.lastIndexOf('\n[');
 const [packed] = JSON.parse(jsonStart < 0 ? packOutput : packOutput.slice(jsonStart + 1));
-assert.equal(packed.name, 'aurora-ui-kit');
+assert.equal(packed.name, 'venhea-ui');
 assert.equal(packed.version, manifest.version);
-assert.equal(packed.filename, `aurora-ui-kit-${manifest.version}.tgz`);
+assert.equal(packed.filename, `venhea-ui-${manifest.version}.tgz`);
 const files = packed.files.map(({ path }) => path).sort();
 for (const expected of ['dist/index.js', 'dist/index.d.ts', 'dist/styles.css', 'package.json', 'README.md', 'LICENSE']) {
   assert(files.includes(expected), `Missing package file: ${expected}`);
@@ -40,7 +40,7 @@ for (const path of files) {
 }
 
 const archive = join(root, packed.filename);
-const consumer = await mkdtemp(join(tmpdir(), 'aurora-ui-kit-consumer-'));
+const consumer = await mkdtemp(join(tmpdir(), 'venhea-ui-consumer-'));
 try {
   await writeFile(join(consumer, 'package.json'), JSON.stringify({ private: true, type: 'module' }));
   // Reuse exactly the React/type versions already installed by npm ci, offline.
@@ -50,7 +50,7 @@ try {
   });
   npm(['install', '--offline', '--ignore-scripts', '--no-audit', '--no-fund', archive, ...dependencies], consumer);
 
-  const installedManifest = JSON.parse(await readFile(join(consumer, 'node_modules/aurora-ui-kit/package.json'), 'utf8'));
+  const installedManifest = JSON.parse(await readFile(join(consumer, 'node_modules/venhea-ui/package.json'), 'utf8'));
   assert.equal(installedManifest.name, manifest.name);
   assert.equal(installedManifest.version, manifest.version);
   assert.equal(installedManifest.private, true);
@@ -63,14 +63,14 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import * as kit from 'aurora-ui-kit';
+import * as kit from 'venhea-ui';
 assert.deepEqual(Object.keys(kit).sort(), ['Badge', 'Button', 'Card', 'CardBody', 'CardFooter', 'CardHeader', 'Input', 'Modal'].sort());
 const html = renderToStaticMarkup(createElement(kit.Button, { variant: 'secondary' }, 'Packed component'));
 assert.match(html, /Packed component/);
 assert.match(html, /type="button"/);
 assert.equal(renderToStaticMarkup(createElement(kit.Modal, { open: false, onClose() {}, title: 'Closed' }, 'Hidden')), '');
-const css = await readFile(new URL(import.meta.resolve('aurora-ui-kit/styles.css')), 'utf8');
-assert.match(css, /--aurora-primary:/);
+const css = await readFile(new URL(import.meta.resolve('venhea-ui/styles.css')), 'utf8');
+assert.match(css, /--venhea-primary:/);
 assert.match(css, /prefers-reduced-motion/);
 console.log('Packed ESM imports, server rendering, and CSS export passed.');
 `);
@@ -78,8 +78,8 @@ console.log('Packed ESM imports, server rendering, and CSS export passed.');
 
   await writeFile(join(consumer, 'consumer.tsx'), `
 import { createRef } from 'react';
-import { Badge, Button, Card, CardBody, CardFooter, CardHeader, Input, Modal } from 'aurora-ui-kit';
-import type { BadgeProps, ButtonProps, CardProps, InputProps, ModalProps } from 'aurora-ui-kit';
+import { Badge, Button, Card, CardBody, CardFooter, CardHeader, Input, Modal } from 'venhea-ui';
+import type { BadgeProps, ButtonProps, CardProps, InputProps, ModalProps } from 'venhea-ui';
 const button: ButtonProps = { variant: 'primary', size: 'sm', ref: createRef<HTMLButtonElement>() };
 const badge: BadgeProps = { variant: 'success' };
 const input: InputProps = { label: 'Demo title', description: 'Synthetic content', ref: createRef<HTMLInputElement>() };
@@ -104,6 +104,6 @@ export const unlabeledInput = <Input />;
 } finally {
   // Delete only the fresh, named temporary consumer created by this check.
   assert.equal(dirname(consumer), resolve(tmpdir()));
-  assert(basename(consumer).startsWith('aurora-ui-kit-consumer-'));
+  assert(basename(consumer).startsWith('venhea-ui-consumer-'));
   await rm(consumer, { recursive: true, force: true });
 }

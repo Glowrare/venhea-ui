@@ -1,10 +1,10 @@
-# Aurora UI Kit
+# Venhea UI
 
 A small TypeScript and React component library with accessible defaults and a
-quiet teal visual design. All examples and code are synthetic sandbox material.
-The package is **`aurora-ui-kit` version `1.2.0`**.
+quiet teal visual design built on shared design tokens.
+The package is **`venhea-ui` version `1.2.0`**.
 
-This private sandbox package can be distributed as a `.tgz` file without
+This private package can be distributed as a `.tgz` file without
 publishing to npm.
 
 ## Setup and validation
@@ -68,7 +68,7 @@ npm pack
 In a React 19 application, install the resulting archive using its actual path:
 
 ```sh
-npm install /path/to/aurora-ui-kit-1.2.0.tgz
+npm install /path/to/venhea-ui-1.2.0.tgz
 ```
 
 Import styles once in the application's entry point. JavaScript imports do not
@@ -76,9 +76,9 @@ inject styles. All component and prop-type exports are named; there is no
 default export or CommonJS entry point.
 
 ```tsx
-import 'aurora-ui-kit/styles.css';
-import { Button, Badge, Input } from 'aurora-ui-kit';
-import type { ButtonProps } from 'aurora-ui-kit';
+import 'venhea-ui/styles.css';
+import { Button, Badge, Input } from 'venhea-ui';
+import type { ButtonProps } from 'venhea-ui';
 
 const saveButton: ButtonProps = { variant: 'primary', size: 'md' };
 
@@ -90,7 +90,7 @@ export function DraftFields() {
         label="Workspace name"
         name="workspace"
         description="Use a synthetic workspace name."
-        defaultValue="Aurora demo"
+        defaultValue="Venhea demo"
       />
       <Button {...saveButton}>Save draft</Button>
     </div>
@@ -154,7 +154,7 @@ Validation timing and announcing new errors belong to the consuming form.
 native div props and refs. Choose headings and landmarks appropriate to the page.
 
 ```tsx
-import { Card, CardHeader, CardBody, CardFooter, Button } from 'aurora-ui-kit';
+import { Card, CardHeader, CardBody, CardFooter, Button } from 'venhea-ui';
 
 <Card aria-labelledby="workspace-title">
   <CardHeader><h2 id="workspace-title">Demo workspace</h2></CardHeader>
@@ -171,7 +171,7 @@ import { Card, CardHeader, CardBody, CardFooter, Button } from 'aurora-ui-kit';
 
 ```tsx
 import { useState } from 'react';
-import { Button, Input, Modal } from 'aurora-ui-kit';
+import { Button, Input, Modal } from 'venhea-ui';
 
 export function EditWorkspace() {
   const [open, setOpen] = useState(false);
@@ -184,7 +184,7 @@ export function EditWorkspace() {
         title="Edit workspace"
         description="Changes affect this demo only."
       >
-        <Input label="Workspace name" defaultValue="Aurora demo" />
+        <Input label="Workspace name" defaultValue="Venhea demo" />
         <Button onClick={() => setOpen(false)}>Save changes</Button>
       </Modal>
     </>
@@ -205,16 +205,16 @@ behavior before using these components in a production product.
 
 ## Design tokens
 
-Styles use the `aurora-` class prefix and `--aurora-*` CSS variables. Override
+Styles use the `venhea-` class prefix and `--venhea-*` CSS variables. Override
 tokens after importing the stylesheet, keeping accessible contrast and visible
 focus indicators:
 
 ```css
 :root {
-  --aurora-primary: #234f68;
-  --aurora-primary-hover: #193b4e;
-  --aurora-radius: 0.75rem;
-  --aurora-font: ui-sans-serif, system-ui, sans-serif;
+  --venhea-primary: #234f68;
+  --venhea-primary-hover: #193b4e;
+  --venhea-radius: 0.75rem;
+  --venhea-font: ui-sans-serif, system-ui, sans-serif;
 }
 ```
 

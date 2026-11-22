@@ -1,6 +1,6 @@
-# Contributing to Aurora UI Kit
+# Contributing to Venhea UI
 
-Contributions to `aurora-ui-kit` are welcome, including bug reports,
+Contributions to `venhea-ui` are welcome, including bug reports,
 accessibility improvements, documentation, and component enhancements. For a
 substantial API or behavior change, open an issue first to discuss the design.
 Small fixes and documentation improvements can go directly to a pull request.
@@ -15,8 +15,8 @@ Fork the repository on GitHub, then clone your fork. Replace `YOUR_USERNAME`
 with your GitHub account:
 
 ```sh
-git clone https://github.com/YOUR_USERNAME/aurora-ui-kit.git
-cd aurora-ui-kit
+git clone https://github.com/YOUR_USERNAME/venhea-ui.git
+cd venhea-ui
 npm ci
 ```
 
@@ -71,7 +71,7 @@ Component tests use jsdom; they do not replace browser or screen-reader testing.
 
 To try the package in a separate application, run `npm pack` and install the
 resulting archive there. At version 1.2.0, the filename is
-`aurora-ui-kit-1.2.0.tgz`. Import `aurora-ui-kit/styles.css` once in that
+`venhea-ui-1.2.0.tgz`. Import `venhea-ui/styles.css` once in that
 application's entry point; see the [README](README.md) for usage examples.
 The package has `private: true`; use the local archive rather than npm publishing.
 
@@ -94,7 +94,7 @@ maintenance. For example:
 ```text
 feat(button): add an outline variant
 fix(input): preserve external description references
-docs: explain the aurora-ui-kit stylesheet import
+docs: explain the venhea-ui stylesheet import
 ```
 
 For an incompatible public API change, add `!` before the colon and describe

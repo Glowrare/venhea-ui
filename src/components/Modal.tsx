@@ -103,7 +103,7 @@ export function Modal({ open, onClose, title, description, children, className }
   return createPortal(
     <div
       ref={layerRef}
-      className="aurora-modal-layer"
+      className="venhea-modal-layer"
       onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}
     >
       <div
@@ -113,16 +113,16 @@ export function Modal({ open, onClose, title, description, children, className }
         aria-labelledby={titleId}
         aria-describedby={description ? descriptionId : undefined}
         tabIndex={-1}
-        className={classes('aurora-modal', className)}
+        className={classes('venhea-modal', className)}
       >
-        <div className="aurora-modal-header">
-          <h2 id={titleId} className="aurora-modal-title">{title}</h2>
-          <button type="button" className="aurora-modal-close" aria-label="Close dialog" onClick={onClose}>
+        <div className="venhea-modal-header">
+          <h2 id={titleId} className="venhea-modal-title">{title}</h2>
+          <button type="button" className="venhea-modal-close" aria-label="Close dialog" onClick={onClose}>
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        {description && <p id={descriptionId} className="aurora-modal-description">{description}</p>}
-        <div className="aurora-modal-content">{children}</div>
+        {description && <p id={descriptionId} className="venhea-modal-description">{description}</p>}
+        <div className="venhea-modal-content">{children}</div>
       </div>
     </div>,
     document.body,

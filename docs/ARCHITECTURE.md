@@ -1,6 +1,6 @@
 # Architecture
 
-Aurora UI Kit is a single ESM package with no production runtime dependencies
+Venhea UI is a single ESM package with no production runtime dependencies
 other than its React 19 and React DOM 19 peers.
 
 - `src/index.ts` defines the public exports. Components expose named prop types;

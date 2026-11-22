@@ -15,11 +15,11 @@ export function Button({
     <button
       {...props}
       type={type}
-      className={classes('aurora-button', `aurora-button--${variant}`, `aurora-button--${size}`, className)}
+      className={classes('venhea-button', `venhea-button--${variant}`, `venhea-button--${size}`, className)}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
     >
-      {loading && <span className="aurora-spinner" aria-hidden="true" />}
+      {loading && <span className="venhea-spinner" aria-hidden="true" />}
       {children}
     </button>
   );

@@ -62,9 +62,9 @@ export function Showcase() {
       <a className="showcase-skip" href="#main">Skip to components</a>
       <header className="showcase-header">
         <div className="header-inner">
-          <a className="showcase-brand" href="#main" aria-label="Aurora UI Kit home">
+          <a className="showcase-brand" href="#main" aria-label="Venhea UI home">
             <span className="brand-mark" aria-hidden="true"><i /><i /><i /><i /></span>
-            <span>Aurora <span className="brand-light">UI Kit</span></span>
+            <span>Venhea <span className="brand-light">UI</span></span>
           </a>
           <div className="header-meta"><span>Local component showcase</span><code>v{version}</code></div>
         </div>
@@ -148,7 +148,7 @@ export function Showcase() {
                 description="A short name that helps your team find it." />
               <Input label="Notification email" type="email" value={email} onChange={(event) => setEmail(event.target.value)}
                 description="Try team@example.test to clear the error." error={emailError} />
-              <Input label="Workspace ID" defaultValue="aurora-demo" disabled description="Assigned when a workspace is created." />
+              <Input label="Workspace ID" defaultValue="venhea-demo" disabled description="Assigned when a workspace is created." />
               <Input label="Reference" value="AK-0042" readOnly description="Read-only, but still selectable and focusable." />
             </div>
             <pre className="example-code"><code>{'<Input label="Project name" description="Give it a clear name." />'}</code></pre>
@@ -193,7 +193,7 @@ export function Showcase() {
             <pre className="example-code"><code>{'<Modal open={open} onClose={close} title="Edit workspace">…</Modal>'}</code></pre>
           </Section>
 
-          <footer className="showcase-footer"><span>Aurora UI Kit · v{version}</span><span>Small pieces. Shared foundations.</span></footer>
+          <footer className="showcase-footer"><span>Venhea UI · v{version}</span><span>Small pieces. Shared foundations.</span></footer>
         </main>
       </div>
 

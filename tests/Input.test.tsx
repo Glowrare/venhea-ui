@@ -17,8 +17,8 @@ describe('Input', () => {
     expect(ref.current).toBe(input);
     await user.click(screen.getByText('Project name'));
     expect(input).toHaveFocus();
-    await user.type(input, 'Aurora');
-    expect(input).toHaveValue('Aurora');
+    await user.type(input, 'Venhea');
+    expect(input).toHaveValue('Venhea');
     expect(onChange).toHaveBeenCalledTimes(6);
   });
 
