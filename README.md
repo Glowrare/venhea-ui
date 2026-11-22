@@ -32,6 +32,31 @@ If your environment uses an organization certificate authority, Node supports
 cache outside a restricted workspace may need a writable location configured
 through the session's `npm_config_cache` environment variable.
 
+## Local development and component showcase
+
+After `npm ci`, start the Vite showcase:
+
+```sh
+npm run dev
+```
+
+Open **http://127.0.0.1:5173/** in your browser. The server listens on loopback
+only; stop it with Ctrl+C. If port 5173 is busy, use `npm run dev -- --port 5174`
+and open the URL Vite prints.
+
+The responsive showcase displays all five components with their existing styles
+and tokens. Try Button variants, sizes, disabled and loading states; all Badge
+variants; editable, invalid, disabled and read-only Inputs; composed Cards; and
+a Modal that updates the example workspace name. Explore with Tab and Shift+Tab,
+and close the dialog with Escape, Cancel, its close button, or the backdrop.
+Examples use local React state, reset on reload, and do not send data anywhere.
+
+Edit `showcase/` for the page and `src/` for the components. Vite reloads the page
+as files change. `npm run test:watch` runs component tests during development.
+The showcase is included in strict typechecking, but its separate Vite config
+does not change `npm run build`, which builds the library only. Showcase code
+is not a public export and is excluded from declarations and the npm archive.
+
 ## Install the local package
 
 In this repository:
@@ -212,7 +237,7 @@ external. `prepack` builds before `npm pack`; it does not change the version.
 | `package.json` | Version, export map, peer dependencies, private-package guard |
 | `README.md`, `LICENSE` | Consumer documentation and MIT license |
 
-Source, tests, scripts, lockfile, architecture documentation, Git metadata,
+Source, showcase, tests, scripts, lockfile, architecture documentation, Git metadata,
 and caches are excluded from the archive.
 `dist/`, `node_modules/`, and `.tgz` files are ignored by Git. Rebuild after
 cloning; compiled files and the archive remain available locally after validation.

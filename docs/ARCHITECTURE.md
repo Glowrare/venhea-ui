@@ -15,6 +15,10 @@ other than its React 19 and React DOM 19 peers.
   supported; there is no global modal stack.
 - `src/styles.css` defines shared tokens and scoped component classes. Consumers
   explicitly import the exported stylesheet and may override tokens.
+- `showcase/` is a local React app served by its own Vite configuration through
+  `npm run dev`. It imports library source and shared CSS, uses only browser
+  state, and is typechecked alongside the library. It is excluded from public
+  exports, emitted declarations, and the package's distribution allowlist.
 - Vite bundles JavaScript while externalizing React and React DOM. TypeScript
   emits declarations separately, and a small Node script copies CSS. Relative
   declaration imports use `.js` extensions to support NodeNext consumers.

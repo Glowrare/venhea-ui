@@ -31,6 +31,10 @@ Components live in `src/components/`, public exports in `src/index.ts`, and
 shared tokens and styles in `src/styles.css`. Tests live in `tests/`. Read the
 [architecture overview](docs/ARCHITECTURE.md) before making structural changes.
 
+Use `npm run dev` to view the local component showcase at
+http://127.0.0.1:5173/. Showcase-only code lives in `showcase/` and is excluded
+from the distributed package. Keep public library exports in `src/`.
+
 Run component tests in watch mode while making changes:
 
 ```sh
