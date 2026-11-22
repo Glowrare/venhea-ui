@@ -8,6 +8,7 @@ import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+const manifest = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
 const require = createRequire(import.meta.url);
 const npmCli = process.env.npm_execpath;
 assert(npmCli, 'Run this check through npm run test:package.');
@@ -19,10 +20,13 @@ function npm(args, cwd = root) {
 }
 
 // Use the real pack lifecycle, including prepack, rather than inspecting dist alone.
-const [packed] = JSON.parse(npm(['pack', '--json']));
+const packOutput = npm(['pack', '--json']);
+// npm can forward prepack's build output before the final JSON array.
+const jsonStart = packOutput.lastIndexOf('\n[');
+const [packed] = JSON.parse(jsonStart < 0 ? packOutput : packOutput.slice(jsonStart + 1));
 assert.equal(packed.name, '@aurora-sandbox/ui-kit');
-assert.equal(packed.version, '1.2.0');
-assert.equal(packed.filename, 'aurora-sandbox-ui-kit-1.2.0.tgz');
+assert.equal(packed.version, manifest.version);
+assert.equal(packed.filename, `aurora-sandbox-ui-kit-${manifest.version}.tgz`);
 const files = packed.files.map(({ path }) => path).sort();
 for (const expected of ['dist/index.js', 'dist/index.d.ts', 'dist/styles.css', 'package.json', 'README.md', 'LICENSE']) {
   assert(files.includes(expected), `Missing package file: ${expected}`);
