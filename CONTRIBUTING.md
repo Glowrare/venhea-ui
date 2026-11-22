@@ -39,16 +39,5 @@ feat(button)!: rename the compact size
 BREAKING CHANGE: use size="sm" instead of size="compact".
 ```
 
-These examples are guidance only. There are no commit hooks, commit analyzer,
-automatic version changes, or release jobs in the baseline.
-
-## Recording boundary
-
-The preparation baseline is version 1.2.0 on `main`, tagged `v1.2.0`. Keep that
-baseline intact until the recording. Create the test feature branch and PR
-during recording. Do not move the baseline tag or add unreleased feature/fix
-commits to the prepared `main` branch.
-
-The future recording owns release tooling, workflow permissions, changelog and
-version policy, GitHub Release creation, and asset attachment. Do not prebuild
-that work as part of sandbox preparation. npm publication is out of scope.
+Use these examples as commit-message guidance. Keep npm publication disabled
+for this private sandbox package.

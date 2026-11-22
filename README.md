@@ -2,17 +2,15 @@
 
 A small TypeScript and React component library with accessible defaults and a
 quiet teal visual design. All examples and code are synthetic sandbox material.
-The baseline package is **`@aurora-sandbox/ui-kit` version `1.2.0`**.
+The package is **`aurora-ui-kit` version `1.2.0`**.
 
-This repository is preparation for a GitHub release-engineering recording.
-Release automation is intentionally absent. The package is private and can be
-distributed as a `.tgz` file without publishing to npm.
+This private sandbox package can be distributed as a `.tgz` file without
+publishing to npm.
 
 ## Setup and validation
 
-Use Node **26.13.0 or newer** and npm. `.nvmrc` selects 26.13.0. The development
-runtime matches the current semantic-release runtime requirement; that tool is
-not installed or configured here. React and React DOM 19 are peer dependencies.
+Use Node **26.13.0 or newer** and npm. `.nvmrc` selects 26.13.0.
+React and React DOM 19 are peer dependencies.
 
 ```sh
 npm ci
@@ -45,7 +43,7 @@ npm pack
 In a React 19 application, install the resulting archive using its actual path:
 
 ```sh
-npm install /path/to/aurora-sandbox-ui-kit-1.2.0.tgz
+npm install /path/to/aurora-ui-kit-1.2.0.tgz
 ```
 
 Import styles once in the application's entry point. JavaScript imports do not
@@ -53,9 +51,9 @@ inject styles. All component and prop-type exports are named; there is no
 default export or CommonJS entry point.
 
 ```tsx
-import '@aurora-sandbox/ui-kit/styles.css';
-import { Button, Badge, Input } from '@aurora-sandbox/ui-kit';
-import type { ButtonProps } from '@aurora-sandbox/ui-kit';
+import 'aurora-ui-kit/styles.css';
+import { Button, Badge, Input } from 'aurora-ui-kit';
+import type { ButtonProps } from 'aurora-ui-kit';
 
 const saveButton: ButtonProps = { variant: 'primary', size: 'md' };
 
@@ -131,7 +129,7 @@ Validation timing and announcing new errors belong to the consuming form.
 native div props and refs. Choose headings and landmarks appropriate to the page.
 
 ```tsx
-import { Card, CardHeader, CardBody, CardFooter, Button } from '@aurora-sandbox/ui-kit';
+import { Card, CardHeader, CardBody, CardFooter, Button } from 'aurora-ui-kit';
 
 <Card aria-labelledby="workspace-title">
   <CardHeader><h2 id="workspace-title">Demo workspace</h2></CardHeader>
@@ -148,7 +146,7 @@ import { Card, CardHeader, CardBody, CardFooter, Button } from '@aurora-sandbox/
 
 ```tsx
 import { useState } from 'react';
-import { Button, Input, Modal } from '@aurora-sandbox/ui-kit';
+import { Button, Input, Modal } from 'aurora-ui-kit';
 
 export function EditWorkspace() {
   const [open, setOpen] = useState(false);
@@ -214,16 +212,15 @@ external. `prepack` builds before `npm pack`; it does not change the version.
 | `package.json` | Version, export map, peer dependencies, private-package guard |
 | `README.md`, `LICENSE` | Consumer documentation and MIT license |
 
-Source, tests, scripts, lockfile, architecture and preparation reports, Git
-metadata, caches, and release configuration are excluded from the archive.
+Source, tests, scripts, lockfile, architecture documentation, Git metadata,
+and caches are excluded from the archive.
 `dist/`, `node_modules/`, and `.tgz` files are ignored by Git. Rebuild after
 cloning; compiled files and the archive remain available locally after validation.
 `private: true` prevents npm publication while allowing `npm pack` and local
 archive installation. A future contributor can attach versioned archives to
 GitHub Releases without publishing to npm.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md), [the architecture overview](docs/ARCHITECTURE.md),
-[baseline GitHub steps](docs/BASELINE.md), and [the preparation report](docs/BASELINE_REPORT.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [the architecture overview](docs/ARCHITECTURE.md).
 
 ## License
 

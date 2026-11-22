@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { access, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import { basename, dirname, join, resolve } from 'node:path';
@@ -24,9 +24,9 @@ const packOutput = npm(['pack', '--json']);
 // npm can forward prepack's build output before the final JSON array.
 const jsonStart = packOutput.lastIndexOf('\n[');
 const [packed] = JSON.parse(jsonStart < 0 ? packOutput : packOutput.slice(jsonStart + 1));
-assert.equal(packed.name, '@aurora-sandbox/ui-kit');
+assert.equal(packed.name, 'aurora-ui-kit');
 assert.equal(packed.version, manifest.version);
-assert.equal(packed.filename, `aurora-sandbox-ui-kit-${manifest.version}.tgz`);
+assert.equal(packed.filename, `aurora-ui-kit-${manifest.version}.tgz`);
 const files = packed.files.map(({ path }) => path).sort();
 for (const expected of ['dist/index.js', 'dist/index.d.ts', 'dist/styles.css', 'package.json', 'README.md', 'LICENSE']) {
   assert(files.includes(expected), `Missing package file: ${expected}`);
@@ -50,7 +50,9 @@ try {
   });
   npm(['install', '--offline', '--ignore-scripts', '--no-audit', '--no-fund', archive, ...dependencies], consumer);
 
-  const installedManifest = JSON.parse(await readFile(join(consumer, 'node_modules/@aurora-sandbox/ui-kit/package.json'), 'utf8'));
+  const installedManifest = JSON.parse(await readFile(join(consumer, 'node_modules/aurora-ui-kit/package.json'), 'utf8'));
+  assert.equal(installedManifest.name, manifest.name);
+  assert.equal(installedManifest.version, manifest.version);
   assert.equal(installedManifest.private, true);
   assert.equal(installedManifest.type, 'module');
   assert.equal(installedManifest.peerDependencies.react, '^19.0.0');
@@ -61,13 +63,13 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import * as kit from '@aurora-sandbox/ui-kit';
+import * as kit from 'aurora-ui-kit';
 assert.deepEqual(Object.keys(kit).sort(), ['Badge', 'Button', 'Card', 'CardBody', 'CardFooter', 'CardHeader', 'Input', 'Modal'].sort());
 const html = renderToStaticMarkup(createElement(kit.Button, { variant: 'secondary' }, 'Packed component'));
 assert.match(html, /Packed component/);
 assert.match(html, /type="button"/);
 assert.equal(renderToStaticMarkup(createElement(kit.Modal, { open: false, onClose() {}, title: 'Closed' }, 'Hidden')), '');
-const css = await readFile(new URL(import.meta.resolve('@aurora-sandbox/ui-kit/styles.css')), 'utf8');
+const css = await readFile(new URL(import.meta.resolve('aurora-ui-kit/styles.css')), 'utf8');
 assert.match(css, /--aurora-primary:/);
 assert.match(css, /prefers-reduced-motion/);
 console.log('Packed ESM imports, server rendering, and CSS export passed.');
@@ -76,8 +78,8 @@ console.log('Packed ESM imports, server rendering, and CSS export passed.');
 
   await writeFile(join(consumer, 'consumer.tsx'), `
 import { createRef } from 'react';
-import { Badge, Button, Card, CardBody, CardFooter, CardHeader, Input, Modal } from '@aurora-sandbox/ui-kit';
-import type { BadgeProps, ButtonProps, CardProps, InputProps, ModalProps } from '@aurora-sandbox/ui-kit';
+import { Badge, Button, Card, CardBody, CardFooter, CardHeader, Input, Modal } from 'aurora-ui-kit';
+import type { BadgeProps, ButtonProps, CardProps, InputProps, ModalProps } from 'aurora-ui-kit';
 const button: ButtonProps = { variant: 'primary', size: 'sm', ref: createRef<HTMLButtonElement>() };
 const badge: BadgeProps = { variant: 'success' };
 const input: InputProps = { label: 'Demo title', description: 'Synthetic content', ref: createRef<HTMLInputElement>() };

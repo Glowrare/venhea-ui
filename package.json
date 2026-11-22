@@ -1,5 +1,5 @@
 {
-  "name": "@aurora-sandbox/ui-kit",
+  "name": "aurora-ui-kit",
   "version": "1.2.0",
   "private": true,
   "description": "A small, accessible React component library for a synthetic GitHub sandbox.",
