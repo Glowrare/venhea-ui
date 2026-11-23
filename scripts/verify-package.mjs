@@ -48,7 +48,7 @@ try {
     const { version } = require(`${name}/package.json`);
     return `${name}@${version}`;
   });
-  npm(['install', '--offline', '--ignore-scripts', '--no-audit', '--no-fund', archive, ...dependencies], consumer);
+  npm(['install', '--prefer-offline', '--ignore-scripts', '--no-audit', '--no-fund', archive, ...dependencies], consumer);
 
   const installedManifest = JSON.parse(await readFile(join(consumer, 'node_modules/venhea-ui/package.json'), 'utf8'));
   assert.equal(installedManifest.name, manifest.name);
