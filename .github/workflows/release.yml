@@ -1,0 +1,54 @@
+
+name: Automated Semantic Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  content: read
+
+concurrency:
+  group: venhea-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Validate and Publish
+    runs-on: ubuntu-lates
+
+    permissions:
+      content: write
+
+    steps:
+      - name: Checkout repository and tags
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run tests
+        run: npm test
+      
+      - name: Typecheck
+        run: npm run typecheck
+      
+      - name: Build Library
+        run: npm run build
+      
+      - name: Validate package distribution
+        run: npm run test:package
+      
+      - name: Publish semantic release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
