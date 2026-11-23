@@ -45,4 +45,16 @@ describe('Button', () => {
     await user.click(button);
     expect(onSubmit).toHaveBeenCalledOnce();
   });
+
+  it('supports optional full-width layout', async () => {
+    const { rerender } = render(<Button>Save</Button>);
+    const button = screen.getByRole('button', { name: 'Save' });
+    expect(button).not.toHaveClass('venhea-button--full-width');
+
+    rerender(<Button fullWidth>Save</Button>);
+    expect(button).toHaveClass('venhea-button--full-width');
+
+    rerender(<Button fullWidth={false}>Save</Button>);
+    expect(button).not.toHaveClass('venhea-button--full-width');
+  });
 });

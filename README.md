@@ -105,11 +105,13 @@ export function DraftFields() {
 Variants: `primary` (default), `secondary`, `danger`. Sizes: `sm`, `md` (default),
 `lg`. Native button props and refs are supported. Buttons default to
 `type="button"`; opt into form submission with `type="submit"`.
+Set `fullWidth` to make a button full its available container width.
 
 ```tsx
 <Button variant="secondary" size="sm">Cancel</Button>
 <Button variant="danger" size="lg" disabled>Delete demo</Button>
 <Button loading>Saving draft</Button>
+<Button fullWidth>Save changes</Button>
 ```
 
 Loading disables interaction, exposes `aria-busy`, and keeps the supplied text
