@@ -7,7 +7,7 @@ on:
       - main
 
 permissions:
-  content: read
+  contents: read
 
 concurrency:
   group: venhea-release
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-lates
 
     permissions:
-      content: write
+      contents: write
 
     steps:
       - name: Checkout repository and tags
