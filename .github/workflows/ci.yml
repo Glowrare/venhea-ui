@@ -1,0 +1,38 @@
+name: Pull request validation
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    uses: Glowrare/engineering-workflows/.github/workflows/node-ci.yml@0e36ff49736d7ec4d7b5ebf0fc30b8b8b3466b93
+    with:
+      project-profile: library
+
+  summary:
+    name: Validate summary
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions: {}
+    timeout-minutes: 2
+    steps:
+      - name: Report validation metadata
+        shell: bash
+        env:
+          NODE_VERSION: ${{ needs.validate.outputs.resolved-node-version }}
+          NPM_VERSION: ${{ needs.validate.outputs.resolved-npm-version }}
+          PROFILE: ${{ needs.validate.outputs.validation-profile }}
+        run: |
+          {
+            echo "## CI Validation"
+            echo ""
+            echo "| Property | Value |"
+            echo "| --- | --- |"
+            echo "| Profile | $PROFILE |"
+            echo "| Node.js | $NODE_VERSION |"
+            echo "| npm | $NPM_VERSION |"
+            echo "| Result | Passed |"
+          } >> "$GITHUB_STEP_SUMMARY"
